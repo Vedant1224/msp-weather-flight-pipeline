@@ -27,9 +27,13 @@ This project uses two public data sources.
 
    This dataset contains detailed flight-level records for U.S. airline operations, including scheduled and actual times, delays, cancellations, and delay causes. This project uses all 12 monthly files for calendar year 2024, then filters them to scheduled departures from MSP only.
 
+   Source URL: [https://transtats.bts.gov/PREZIP/](https://transtats.bts.gov/PREZIP/)
+
 2. **NOAA Local Climatological Data for the KMSP station**
 
    This dataset contains weather observations recorded at Minneapolis-St. Paul International Airport, including hourly temperature, precipitation, visibility, wind, and coded weather conditions. This project uses the 2024 KMSP file and aggregates hourly observations into daily weather indicators.
+
+   Source URL: [https://www.ncei.noaa.gov/access/search/data-search/local-climatological-data?startDate=2024-01-01T00:00:00&endDate=2024-12-31T23:59:59&bbox=45.079,-93.366,44.875,-93.162&pageNum=1&stations=72658014922&dataTypes=DailyAverageDryBulbTemperature&dataTypes=DailyAverageWindSpeed&dataTypes=DailyMaximumDryBulbTemperature&dataTypes=DailyMinimumDryBulbTemperature&dataTypes=DailyPeakWindSpeed&dataTypes=DailyPrecipitation&dataTypes=DailySnowDepth&dataTypes=DailySnowfall&dataTypes=DailyWeather&dataTypes=HourlyDryBulbTemperature&dataTypes=HourlyPrecipitation&dataTypes=HourlyPresentWeatherType&dataTypes=HourlySkyConditions&dataTypes=HourlyVisibility&dataTypes=HourlyWindGustSpeed&dataTypes=HourlyWindSpeed](https://www.ncei.noaa.gov/access/search/data-search/local-climatological-data?startDate=2024-01-01T00:00:00&endDate=2024-12-31T23:59:59&bbox=45.079,-93.366,44.875,-93.162&pageNum=1&stations=72658014922&dataTypes=DailyAverageDryBulbTemperature&dataTypes=DailyAverageWindSpeed&dataTypes=DailyMaximumDryBulbTemperature&dataTypes=DailyMinimumDryBulbTemperature&dataTypes=DailyPeakWindSpeed&dataTypes=DailyPrecipitation&dataTypes=DailySnowDepth&dataTypes=DailySnowfall&dataTypes=DailyWeather&dataTypes=HourlyDryBulbTemperature&dataTypes=HourlyPrecipitation&dataTypes=HourlyPresentWeatherType&dataTypes=HourlySkyConditions&dataTypes=HourlyVisibility&dataTypes=HourlyWindGustSpeed&dataTypes=HourlyWindSpeed)
 
 The raw source files are large and are not intended to be committed to version control. The repository documents the expected raw data layout and uses `.gitignore` to exclude raw and generated data folders.
 
