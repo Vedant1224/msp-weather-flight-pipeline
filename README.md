@@ -129,6 +129,50 @@ The pipeline will:
 - build the airline-level monthly mart table
 - write local debug/output CSVs to `data/staged/` and `data/processed/`
 
+## Airflow
+
+### Run the manual pipeline
+
+```bash
+python3 src/run_pipeline.py
+```
+
+### Run the Airflow DAG
+
+The DAG file is:
+
+- `airflow/dags/msp_weather_flight_pipeline_dag.py`
+
+After Airflow is installed and your Airflow home is configured, place this repo on the same machine as your Airflow environment and trigger the DAG named:
+
+- `msp_weather_flight_pipeline`
+
+The DAG is manual only:
+
+- `schedule=None`
+- `catchup=False`
+
+It runs these tasks in order:
+
+- `create_database_and_tables`
+- `load_raw_msp_flights`
+- `load_raw_kmsp_weather`
+- `build_flight_daily`
+- `build_weather_daily`
+- `build_mart_daily`
+- `build_airline_monthly`
+
+### Tables after success
+
+Whether you run the manual pipeline or the Airflow DAG, these MySQL tables should exist after success:
+
+- `raw_flights_msp_2024`
+- `raw_weather_kmsp_2024`
+- `stg_flights_msp_daily`
+- `stg_weather_kmsp_daily`
+- `mart_msp_daily_weather_flights`
+- `mart_msp_airline_monthly_performance`
+
 ## Expected Final Tables
 
 After a successful run, MySQL should contain:

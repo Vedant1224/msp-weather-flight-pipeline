@@ -3,4 +3,5 @@ numpy
 sqlalchemy
 pymysql
 python-dotenv
+apache-airflow
 cryptography
