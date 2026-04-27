@@ -1,0 +1,9 @@
+data/raw/
+data/staged/
+data/processed/
+__pycache__/
+*.pyc
+.env
+.venv/
+.DS_Store
+airflow/logs/
