@@ -278,18 +278,22 @@ Airflow and dashboard screenshots are stored in `docs/dashboard_screenshots/`.
 
 ## Tableau Dashboards
 
-Tableau Desktop was connected directly to the MySQL database, not to manually edited CSV files. The completed workbook is:
+This project has two Tableau deliverables.
+
+The main submitted workbook is the database-linked Tableau Desktop workbook:
 
 - `dashboard/CSDS_397_Final_Project.twb`
-
-The `.twb` workbook stores the Tableau workbook and database connection structure, and it expects the local MySQL database to be running when reopened.
 
 The workbook uses these database tables:
 
 - `mart_msp_daily_weather_flights`
 - `mart_msp_airline_monthly_performance`
 
-The Tableau workbook is database-linked, so reopening it expects the local MySQL database and mart tables to be available.
+It connects directly to the MySQL mart tables and expects the local Docker/MySQL database and mart tables to be available when reopened.
+
+A static interactive Tableau Public viewing copy was also published using packaged extract data:
+
+- [https://public.tableau.com/app/profile/vedant.gupta4764/viz/CSDS_397_Final_Project_Static_Public_Copy/MSP2024WeatherImpactOverview?publish=yes](https://public.tableau.com/app/profile/vedant.gupta4764/viz/CSDS_397_Final_Project_Static_Public_Copy/MSP2024WeatherImpactOverview?publish=yes)
 
 The final workbook includes three dashboards:
 
@@ -305,7 +309,7 @@ Dashboard screenshots are stored in `docs/dashboard_screenshots/`.
 - Non-severe weather days: 140 days, average departure delay 11.51 minutes, average cancellation rate 0.82%, delayed 15+ rate 15.78%.
 - Thunderstorm days had the highest average departure delay at 24.06 minutes and the highest average cancellation rate at 1.92%.
 - Snow days had average departure delay of 17.32 minutes and average cancellation rate of 1.36%.
-- July had the highest average monthly departure delay at 26.81 minutes and highest average cancellation rate at 4.04%.
+- July had the highest average monthly departure delay at 26.81 minutes and highest average cancellation rate at 4.04%, but this should not be interpreted as weather-only because July 2024 also included the CrowdStrike/Microsoft global IT outage and Delta network recovery effects at MSP.
 - Delta had the largest number of MSP departures with 69,402 scheduled departures. Delta’s cancellation rate was 0.83%, while smaller carriers such as Frontier had higher disruption rates.
 
 These results support the main interpretation that weather severity is associated with more disruption at MSP, while also showing that disruption patterns vary across carriers because carrier scale and operating context at MSP are not uniform.
@@ -314,6 +318,7 @@ These results support the main interpretation that weather severity is associate
 
 - Weather is associated with disruption, but this analysis does not prove that weather is the sole cause of each delay or cancellation.
 - Delay can also be caused by airline operations, NAS/air traffic conditions, aircraft rotation, and late arriving aircraft.
+- July 2024 included a major non-weather operational shock from the CrowdStrike/Microsoft outage, so some daily disruption spikes may reflect airline or technology failures rather than local weather alone.
 - The analysis is daily, so it does not model exact hourly cause-and-effect for each individual flight.
 - MSP/KMSP is a strong match for this project because the weather station is located in the same airport environment as the flights being studied.
 
