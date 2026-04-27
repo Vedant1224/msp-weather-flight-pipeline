@@ -12,6 +12,7 @@ from ingestion.load_raw_kmsp_weather import load_raw_kmsp_weather
 from transformation.build_flight_daily import build_flight_daily
 from transformation.build_weather_daily import build_weather_daily
 from transformation.build_mart_daily import build_mart_daily
+from transformation.build_airline_monthly import build_airline_monthly
 from utils.db import run_sql_file
 
 
@@ -38,6 +39,12 @@ def main():
 
     mart_rows = build_mart_daily()
     print(f"Success: mart_msp_daily_weather_flights rows = {mart_rows:,}")
+
+    airline_mart_rows = build_airline_monthly()
+    print(
+        "Success: mart_msp_airline_monthly_performance rows = "
+        f"{airline_mart_rows:,}"
+    )
 
     print("Pipeline completed successfully")
 

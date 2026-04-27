@@ -77,3 +77,62 @@ SELECT
     delayed_15_rate_pct
 FROM mart_msp_daily_weather_flights
 ORDER BY date;
+
+SELECT
+    reporting_airline,
+    SUM(scheduled_departures) AS annual_departures
+FROM mart_msp_airline_monthly_performance
+GROUP BY reporting_airline
+ORDER BY annual_departures DESC;
+
+SELECT
+    reporting_airline,
+    SUM(cancelled_departures) AS annual_cancellations
+FROM mart_msp_airline_monthly_performance
+GROUP BY reporting_airline
+ORDER BY annual_cancellations DESC;
+
+SELECT
+    reporting_airline,
+    SUM(scheduled_departures) AS annual_departures,
+    SUM(cancelled_departures) AS annual_cancellations,
+    ROUND(SUM(cancelled_departures) / SUM(scheduled_departures) * 100, 2) AS cancellation_rate_pct
+FROM mart_msp_airline_monthly_performance
+GROUP BY reporting_airline
+HAVING SUM(scheduled_departures) >= 1000
+ORDER BY cancellation_rate_pct DESC, annual_departures DESC;
+
+SELECT
+    reporting_airline,
+    SUM(completed_departures) AS annual_completed_departures,
+    SUM(delayed_15_count) AS annual_delayed_15_count,
+    ROUND(SUM(delayed_15_count) / NULLIF(SUM(completed_departures), 0) * 100, 2) AS delayed_15_rate_pct
+FROM mart_msp_airline_monthly_performance
+GROUP BY reporting_airline
+HAVING SUM(scheduled_departures) >= 1000
+ORDER BY delayed_15_rate_pct DESC, annual_completed_departures DESC;
+
+SELECT
+    month,
+    month_name,
+    reporting_airline,
+    scheduled_departures
+FROM mart_msp_airline_monthly_performance
+ORDER BY month, scheduled_departures DESC, reporting_airline;
+
+SELECT
+    month,
+    month_name,
+    reporting_airline,
+    scheduled_departures,
+    cancelled_departures,
+    cancellation_rate_pct,
+    avg_dep_delay_minutes,
+    delayed_15_rate_pct,
+    total_weather_delay_minutes,
+    total_nas_delay_minutes,
+    total_late_aircraft_delay_minutes
+FROM mart_msp_airline_monthly_performance
+WHERE scheduled_departures >= 100
+ORDER BY cancellation_rate_pct DESC, avg_dep_delay_minutes DESC, scheduled_departures DESC
+LIMIT 20;

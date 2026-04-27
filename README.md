@@ -2,7 +2,7 @@
 
 ## Project Goal
 
-This project builds a simple local data pipeline to analyze how 2024 weather at Minneapolis-St. Paul International Airport (`MSP` / `KMSP`) relates to flight delays and cancellations. The pipeline ingests BTS flight data and NOAA weather data, cleans and transforms both sources, loads the results into MySQL, and creates a final daily mart table for Tableau.
+This project builds a simple local data pipeline to analyze how 2024 weather at Minneapolis-St. Paul International Airport (`MSP` / `KMSP`) relates to flight delays and cancellations. The pipeline ingests BTS flight data and NOAA weather data, cleans and transforms both sources, loads the results into MySQL, and creates final daily and airline-level mart tables for Tableau.
 
 ## Hypotheses
 
@@ -46,6 +46,7 @@ The project uses a simple manual pipeline:
 3. Aggregate flights to one row per day in `stg_flights_msp_daily`
 4. Aggregate weather to one row per day in `stg_weather_kmsp_daily`
 5. Join both daily tables into `mart_msp_daily_weather_flights`
+6. Aggregate monthly MSP performance by `reporting_airline` into `mart_msp_airline_monthly_performance`
 
 Python scripts live in:
 
@@ -68,12 +69,13 @@ This project uses simple table prefixes rather than multiple schemas:
 - `stg_flights_msp_daily`
 - `stg_weather_kmsp_daily`
 - `mart_msp_daily_weather_flights`
+- `mart_msp_airline_monthly_performance`
 
 ### Table Roles
 
 - `raw_*` tables store filtered, cleaned source-level data
 - `stg_*` tables store daily aggregations for flights and weather
-- `mart_*` table stores the final Tableau-ready daily dataset
+- `mart_*` tables store the final Tableau-ready analysis datasets
 
 ## Environment Setup
 
@@ -124,6 +126,7 @@ The pipeline will:
 - build daily flight staging
 - build daily weather staging
 - build the final daily mart table
+- build the airline-level monthly mart table
 - write local debug/output CSVs to `data/staged/` and `data/processed/`
 
 ## Expected Final Tables
@@ -135,6 +138,7 @@ After a successful run, MySQL should contain:
 - `stg_flights_msp_daily`
 - `stg_weather_kmsp_daily`
 - `mart_msp_daily_weather_flights`
+- `mart_msp_airline_monthly_performance`
 
 ## Expected Local Output Files
 
@@ -148,18 +152,21 @@ After a successful run, MySQL should contain:
 - `stg_flights_msp_daily.csv`
 - `stg_weather_kmsp_daily.csv`
 - `mart_msp_daily_weather_flights.csv`
+- `mart_msp_airline_monthly_performance.csv`
 
 ## Tableau / Dashboard Plan
 
 Tableau Desktop should connect directly to the MySQL table:
 
 - `mart_msp_daily_weather_flights`
+- `mart_msp_airline_monthly_performance`
 
 Suggested dashboards:
 
 - delay and cancellation by weather category
 - severe weather vs non-severe weather comparison
 - monthly trend lines for delays and cancellations
+- monthly airline comparison by `reporting_airline`
 - top worst disruption days
 - weather condition filters for interactive analysis
 

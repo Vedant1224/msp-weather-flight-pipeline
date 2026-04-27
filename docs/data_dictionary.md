@@ -47,3 +47,23 @@ Main final table: `mart_msp_daily_weather_flights`
 | `precip_day_flag` | Flag for precipitation that day |
 | `severe_weather_day` | Combined severe weather indicator |
 | `weather_category` | Main daily weather label used in analysis |
+
+Additional mart table: `mart_msp_airline_monthly_performance`
+
+| Column | Description |
+| --- | --- |
+| `month` | Numeric month in 2024 |
+| `month_name` | Month name |
+| `reporting_airline` | BTS carrier code from `reporting_airline` |
+| `scheduled_departures` | Total scheduled MSP departures for the airline and month |
+| `completed_departures` | Non-cancelled departures |
+| `cancelled_departures` | Cancelled departures |
+| `cancellation_rate_pct` | Cancelled departures divided by scheduled departures as a percentage |
+| `avg_dep_delay_minutes` | Average departure delay minutes for non-cancelled departures |
+| `delayed_15_count` | Completed departures delayed by 15 or more minutes |
+| `delayed_15_rate_pct` | Delayed 15 count divided by completed departures as a percentage |
+| `total_carrier_delay_minutes` | Sum of carrier delay minutes |
+| `total_weather_delay_minutes` | Sum of weather delay minutes |
+| `total_nas_delay_minutes` | Sum of NAS delay minutes |
+| `total_security_delay_minutes` | Sum of security delay minutes |
+| `total_late_aircraft_delay_minutes` | Sum of late aircraft delay minutes |
