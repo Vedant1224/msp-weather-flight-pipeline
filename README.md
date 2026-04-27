@@ -44,6 +44,29 @@ The raw source files are large and are not intended to be committed to version c
 | `mart_msp_daily_weather_flights` | Mart | One row per date | 366 |
 | `mart_msp_airline_monthly_performance` | Mart | One row per month and reporting airline | 165 |
 
+## Airline Codes in the MSP Departure Mart
+
+The airline-level mart uses the BTS `reporting_airline` field. After filtering the national BTS files to 2024 MSP departures, the following carrier codes appeared in the final airline analysis.
+
+| Code | Airline |
+| --- | --- |
+| 9E | Endeavor Air (Delta Connection) |
+| AA | American Airlines |
+| AS | Alaska Airlines |
+| B6 | JetBlue Airways |
+| DL | Delta Air Lines |
+| F9 | Frontier Airlines |
+| G4 | Allegiant Air |
+| MQ | Envoy Air (American Eagle) |
+| NK | Spirit Airlines |
+| OH | PSA Airlines (American Eagle) |
+| OO | SkyWest Airlines |
+| UA | United Airlines |
+| WN | Southwest Airlines |
+| YX | Republic Airways |
+
+This mapping is included for dashboard readability because Tableau displays the BTS carrier codes directly.
+
 ## Repository Structure
 
 ```text
@@ -262,6 +285,8 @@ The workbook uses these database tables:
 - `mart_msp_daily_weather_flights`
 - `mart_msp_airline_monthly_performance`
 
+The Tableau workbook is database-linked, so reopening it expects the local MySQL database and mart tables to be available.
+
 The final workbook includes three dashboards:
 
 - `MSP 2024 Weather Impact Overview`
@@ -291,3 +316,5 @@ These results support the main interpretation that weather severity is associate
 ## Final Project Status
 
 This repository contains the completed pipeline code, SQL files, Airflow DAG, Tableau workbook, screenshots, and documentation needed to reproduce the final project locally.
+
+It satisfies the major assignment components of ingestion, cleaning, transformation, MySQL storage, Airflow orchestration, hypothesis-driven analysis, and Tableau visualization.
